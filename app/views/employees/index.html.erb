@@ -1,28 +1,16 @@
-<h2 class="text-2xl font-bold mb-4 text-center text-blue-700">Employee List</h2>
+<p style="color: green"><%= notice %></p>
 
-<div class="overflow-x-auto">
-  <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-    <thead>
-      <tr class="bg-blue-600 text-white">
-        <th class="py-3 px-6 text-left">Name</th>
-        <th class="py-3 px-6 text-left">Email</th>
-        <th class="py-3 px-6 text-left">Position</th>
-        <th class="py-3 px-6 text-left">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @employees.each_with_index do |employee, index| %>
-        <tr class="<%= index.even? ? 'bg-gray-100' : 'bg-white' %> hover:bg-blue-50">
-          <td class="py-3 px-6"><%= employee.name %></td>
-          <td class="py-3 px-6"><%= employee.email %></td>
-          <td class="py-3 px-6"><%= employee.position %></td>
-          <td class="py-3 px-6 flex space-x-2">
-            <%= link_to 'Show', employee_path(employee), class: 'text-blue-600 hover:text-blue-900 font-semibold' %>
-            <%= link_to 'Edit', edit_employee_path(employee), class: 'text-green-600 hover:text-green-900 font-semibold' %>
-            <%= link_to 'Delete', employee_path(employee), method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-red-600 hover:text-red-900 font-semibold' %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<% content_for :title, "Employees" %>
+
+<h1>Employees</h1>
+
+<div id="employees">
+  <% @employees.each do |employee| %>
+    <%= render employee %>
+    <p>
+      <%= link_to "Show this employee", employee %>
+    </p>
+  <% end %>
 </div>
+
+<%= link_to "New employee", new_employee_path %>
